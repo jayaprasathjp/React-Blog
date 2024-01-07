@@ -1,0 +1,22 @@
+header{
+    background: #EDC7B7;
+}
+header .container{
+    max-width:1200px;
+    margin: 0 auto;
+    padding:10px 20px;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+}
+header a{
+    color: #333;
+    text-decoration: none;
+}
+nav{
+    display: flex;
+    align-items: center;
+}
+nav a{
+    margin-left: 20px;
+}
