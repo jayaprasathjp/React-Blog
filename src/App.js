@@ -4,11 +4,13 @@ import Home from "./screens/home/Home";
 import PostDetail from "./screens/postdetail/PostDetail";
 import CreatePost from "./screens/create/CreatePost";
 import EditPost from "./screens/edit/EditPost";
+import ThemeSwitch from "./components/switch/ThemeSwitch";
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
+        <ThemeSwitch/>
         <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
