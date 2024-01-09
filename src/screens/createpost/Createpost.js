@@ -1,34 +1,43 @@
-import React, { useEffect, useState } from "react";
-import "./CreatePost.css";
-import { useFetch } from "../../hooks/useFetch";
-import { useNavigate } from "react-router-dom";
-export default function CreatePost() {
+import React from "react";
+import "./Createpost.css";
+import { useState,useEffect } from "react";
+import { useFetch } from './../../hooks/useFetch';
+import { useNavigate } from 'react-router-dom';
+import Appsubmitbutton from "../../components/appsubmitbutton/Appsubmitbutton";
+
+export default function Createpost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [validationError, setValidationError] = useState("");
-  const navigate=useNavigate()
-  const {data, error,optionData}=useFetch('https://jsonplaceholder.typicode.com/posts',"POST")
+
+  const navigate = useNavigate()
+  
+  const {data, error,optionsData} = useFetch('https://jsonplaceholder.typicode.com/posts',"POST")
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
     if (!title) {
-      setValidationError("Please enter a title for the post.");
+      setValidationError("Title should not be empty");
       return
     }
     if (!content) {
-      setValidationError("Please write something in the content field.");
+      setValidationError("Content should not be empty");
       return
     }
     setValidationError("");
-    console.log({ title, body:content ,userId:1});
-    optionData({ title, body:content ,userId:1})
+    console.log({ title, body: content, userId:1});
+    optionsData({ title, body: content, userId:1})
   };
-  useEffect(()=>{
-    if(data.length!==0){
-      const timer=setTimeout(()=>navigate("/"),3000);
-      return ()=>clearTimeout(timer)
+
+  useEffect(() => {
+    if (data.length !== 0) {
+      const timer = setTimeout(() => navigate("/"),3000);
+      return () => clearTimeout(timer)
     }
-  },[data,navigate]);
+
+  },[data,navigate])
+
   return (
     <div className="outercontainer">
       <form onSubmit={handleSubmit}>
@@ -45,7 +54,7 @@ export default function CreatePost() {
         </div>
         <div className="form-group">
           <label>
-            <h6>Content </h6>
+            <h6>Content:</h6>
           </label>
           <textarea
             className="form-control"
@@ -59,18 +68,17 @@ export default function CreatePost() {
           </div>
         )}
         {
-          data.length!==0 && <div className="alert alert-success" role="alert">
-          Post Created Successfully!
-        </div>
-        }{
-          error&&<div class="alert alert-danger" role="alert">
-          {error}
-        </div>
+          data.length !== 0 && <div className="alert alert-success" role="alert">
+            Post Created Successfully!
+          </div>
+        }
+        {
+          error && <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
         }
         <div className="float-end">
-          <button type="submit" className="btn btn-primary">
-            Create
-          </button>
+          <Appsubmitbutton title="Create"/>
         </div>
       </form>
     </div>

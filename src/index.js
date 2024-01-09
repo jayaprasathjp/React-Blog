@@ -4,11 +4,11 @@ import './index.css';
 import App from './App';
 import { ThemeContextProvider } from './context/ThemeContext';
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ThemeContextProvider>
+   <ThemeContextProvider>
         <App />
     </ThemeContextProvider> 
 );
+
 

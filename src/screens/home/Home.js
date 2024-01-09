@@ -1,17 +1,24 @@
-import { useFetch } from "../../hooks/useFetch";
-import "./Home.css";
+import React from "react";
 import Post from "../../components/post/Post";
+import "./Home.css";
+import { useFetch } from './../../hooks/useFetch';
+
 export default function Home() {
- const {data:posts,error,isPending}=useFetch("https://jsonplaceholder.typicode.com/posts")
-  return (<div className="container ">
+
+  const {data : posts,error,isPending} = useFetch("https://jsonplaceholder.typicode.com/posts")
+
+  return (<div className="container">
     {
-      posts && posts.map((post)=>{
-        return <Post key={post.id} post={post}/>
+      posts && posts.map((post) => {
+        return <Post post={post} key={post.id}/>
       })
-    }{
-      error&&<h3>{error}</h3>
-    }{
-      isPending&&<h3>Loading...</h3>
     }
+    {
+      error && <p>{error}</p>
+    }
+    {
+      isPending && <h3>Loading...</h3>
+    }
+
   </div>)
 }

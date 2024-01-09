@@ -1,11 +1,12 @@
 import React from "react";
 
-import './ThemeSwitch.css';
+import './Themeswitch.css';
 import { useThemeContext } from './../../hooks/useThemeContext';
 
 export default function ThemeSwitch() {
 
 
+  const {theme,dispatch} = useThemeContext()
 
 
   const switchTheme = () => {

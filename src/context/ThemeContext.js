@@ -5,7 +5,7 @@ import { useReducer } from 'react';
 
 export const ThemeContext = createContext()
 
-const ThemeReducer = (state,action) => {
+const ThemesReducer = (state,action) => {
     switch (action.type) {
         case 'LIGHT':
             return {...state,theme:'light'}
@@ -19,7 +19,7 @@ const ThemeReducer = (state,action) => {
 
 export const ThemeContextProvider = ({children}) => {
 
-    const [state,dispatch] = useReducer(ThemeReducer,{theme : 'light'})
+    const [state,dispatch] = useReducer(ThemesReducer,{theme : 'light'})
     return (
         <ThemeContext.Provider  value={{...state,dispatch}}>
             {children}
@@ -27,4 +27,5 @@ export const ThemeContextProvider = ({children}) => {
 
     )
 }
+
 

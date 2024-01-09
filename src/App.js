@@ -1,23 +1,28 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
-import Home from "./screens/home/Home"; 
-import PostDetail from "./screens/postdetail/PostDetail";
-import CreatePost from "./screens/create/CreatePost";
-import EditPost from "./screens/edit/EditPost";
-import ThemeSwitch from "./components/switch/ThemeSwitch";
+import Home from "./screens/home/Home";
+import Createpost from "./screens/createpost/Createpost";
+import Postdetail from "./screens/postdetail/Postdetail";
+import Editpost from "./screens/editpost/Editpost";
+import Themeswitch from "./components/switch/Themeswitch";
+
+import { useThemeContext } from "./hooks/useThemeContext";
+
 function App() {
+  const { theme } = useThemeContext();
+
   return (
-    <div className="App">
+    <div className={`App ${theme}bg`}>
       <BrowserRouter>
         <Navbar />
-        <ThemeSwitch/>
+        <Themeswitch />
         <div className="container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/create" element={<CreatePost />} />
-          <Route path="/post/:id" element={<PostDetail/>}/>
-          <Route path="/edit/:id" element={<EditPost/>}/>
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/create" element={<Createpost />} />
+            <Route path="/post/:id" element={<Postdetail />} />
+            <Route path="/edit/:id" element={<Editpost />} />
+          </Routes>
         </div>
       </BrowserRouter>
     </div>

@@ -1,12 +1,18 @@
 body {
   margin: 0;
-  background-color: #EEE2Dc;
+  /* background: #EEE2DC; */
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited{
-  background-color: #a86c4e !important;
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color:#a86c4e !important;
+}
+
+#root {
+  height: 100vh;
 }

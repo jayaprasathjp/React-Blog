@@ -1,51 +1,63 @@
-import React from "react";
-import "./EditPost.css";
+import React, { useState, useEffect } from "react";
+import "./Editpost.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useFetch } from "../../hooks/useFetch";
-import { useEffect, useState } from "react";
-export default function EditPost() {
+import { useFetch } from "./../../hooks/useFetch";
+import Appsubmitbutton from "../../components/appsubmitbutton/Appsubmitbutton";
+
+export default function Editpost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [validationError, setValidationError] = useState("");
-  const [modified, setModified] = useState({});
+  const [modifiedField,setModifiedField] = useState({})
+
   const navigate = useNavigate();
+
   const location = useLocation();
+
   const { state: post } = location;
-  const { data, error, optionData } = useFetch(
+
+
+  const { data, error, optionsData } = useFetch(
     `https://jsonplaceholder.typicode.com/posts/${post.id}`,
     "PATCH"
   );
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!title) {
-      setValidationError("Please enter a title for the post.");
+      setValidationError("Title should not be empty");
       return;
     }
     if (!content) {
-      setValidationError("Please write something in the content field.");
+      setValidationError("Content should not be empty");
       return;
     }
     setValidationError("");
-    optionData(modified)
+    console.log(modifiedField);
+    optionsData(modifiedField)
   };
+
   useEffect(() => {
-    setTitle(post.title);
-    setContent(post.body);
+    setTitle(post.title)
+    setContent(post.body)
     if (data.length !== 0) {
       const timer = setTimeout(() => navigate("/"), 3000);
       return () => clearTimeout(timer);
     }
-  }, [data, navigate, post.title, post.body]);
-  const onTitleChange = (e) => {
-    setTitle(e.target.value);
-    setModified({...modified,title:e.target.value})
-  };
-  const onContentChange = (e) => {
-    setContent(e.target.value);
-    setModified({...modified,body:e.target.value})
+  }, [data, navigate,post.title,post.body]);
 
-  };
+
+  const onTitleChange = (e) => {
+    setTitle(e.target.value)
+    setModifiedField({...modifiedField,title:e.target.value})
+  }
+
+  const onContentChange = (e) => {
+    setContent(e.target.value)
+    setModifiedField({...modifiedField,body:e.target.value})
+
+  }
 
   return (
     <div className="outercontainer">
@@ -63,13 +75,12 @@ export default function EditPost() {
         </div>
         <div className="form-group">
           <label>
-            <h6>Content </h6>
+            <h6>Content:</h6>
           </label>
-          <textarea
-            rows="5"
+          <textarea rows="5"
             className="form-control"
             value={content}
-            onChange={onContentChange}
+            onChange={onContentChange }
           />
         </div>
         {validationError && (
@@ -83,14 +94,12 @@ export default function EditPost() {
           </div>
         )}
         {error && (
-          <div class="alert alert-danger" role="alert">
+          <div className="alert alert-danger" role="alert">
             {error}
           </div>
         )}
         <div className="float-end">
-          <button type="submit" className="btn btn-primary">
-            Update
-          </button>
+          <Appsubmitbutton title="Edit"/>
         </div>
       </form>
     </div>
